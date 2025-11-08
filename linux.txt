@@ -1,0 +1,22 @@
+ping google.com
+Sends ICMP echo requests to the target host and waits for replies.
+Helps verify internet connectivity and measure latency (time delay).
+If replies are received, the host is reachable; otherwise, the host or network may be down.
+
+ifconfig
+Displays details of active and inactive interfaces such as eth0, wlan0, etc.
+Useful for identifying your system’s current IP address and verifying interface connectivity.
+
+traceroute google.com
+Helps diagnose routing problems and identify where a connection fails.
+Each line in the output shows a hop (router) along the path with response time.
+
+netstat -r 
+Displays the routing table, showing how packets are forwarded.
+Columns include Destination, Gateway, Genmask, and Interface.
+Helps verify proper routing and gateway configuration.
+
+nslookup google.com
+Confirms that DNS (Domain Name System) is functioning correctly.
+Returns both the domain name and the associated IP address
+
