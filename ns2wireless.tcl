@@ -101,3 +101,11 @@ $ns at 5.0 "finish"
 
 # Run simulation
 $ns run
+
+sudo apt update
+sudo apt install ns2 nam
+sudo apt install tcl
+sudo apt install tk
+
+ns ns2wireless.tcl
+nam out.nam
