@@ -1,0 +1,141 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+sudo apt update
+sudo apt install ns2 nam
+sudo apt install tcl
+sudo apt install tk
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+set num_nodes 2
+
+set ns [new Simulator]
+
+set nf [open out.nam w]
+$ns namtrace-all $nf
+
+proc finish {} {
+    global ns nf
+    $ns flush-trace
+    close $nf
+    exec nam out.nam &
+    exit 0
+}
+
+
+set node1 [$ns node]
+set node2 [$ns node]
+
+$ns duplex-link $node1 $node2 1Mb 10ms DropTail
+
+
+set window_size 4
+set num_packets 10
+set packet_size 500
+
+
+set tcp [new Agent/TCP]
+$tcp set window_ $window_size
+$ns attach-agent $node1 $tcp
+
+set sink [new Agent/TCPSink]
+$ns attach-agent $node2 $sink
+$ns connect $tcp $sink
+
+set ftp [new Application/FTP]
+$ftp attach-agent $tcp
+$ftp set packetSize_ $packet_size
+$ftp set maxpkts_ $num_packets
+
+
+$ns at 0.5 "$ftp start"
+
+
+$ns at 10.0 "finish"
+
+
+$ns run
+
+
+Topology: You will again see two nodes, node1 and node2, connected by a single link.
+
+Traffic Start (0.5s): The FTP application starts, and node1 (the TCP agent) begins sending data.
+
+Two-Way Packet Flow: This is the most important part.
+
+    Data Packets: You will see data packets (representing the FTP traffic) traveling from node1 to node2.
+
+    ACK Packets: Almost simultaneously, you will see acknowledgment (ACK) packets (which are typically smaller) traveling back from node2 (the TCPSink) to node1.
+
+TCP Windowing: Because the window_size is set to 4, node1 will send a burst of up to 4 packets before it has to wait for an ACK from node2 to "slide the window" and send more. You'll see this stop-and-go or bursting behavior as packets and ACKs cross paths on the link.
+
+Short Duration: The FTP application is set to send only 10 packets (num_packets 10). This transfer will happen very quickly (likely in less than a second of simulation time).
+
+Idle Time: After the 10 data packets are successfully sent and acknowledged, the link will go idle. The simulation will continue to run with no activity until it hits the finish command at 10.0 seconds, which leaves the NAM window open for you to inspect.
