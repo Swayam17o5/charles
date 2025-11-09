@@ -22,10 +22,13 @@ sudo ufw reload
 
 7)ftp <ip addr>
 8)ftp> ls
-ftp> get hello.txt
-ftp> put hello.txt
-ftp> delete hello.txt
+ftp> put linux.txt
 
+
+2nd trminal window 
+1) sudo ftp 127.0.1.1
+2)ftp> get linux.txt
+ftp> delete linux.txt
 
 
 
