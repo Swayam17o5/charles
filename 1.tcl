@@ -38,3 +38,8 @@ $ns at 5.0 "finish"
 
 $ns run
 
+
+
+
+ns 1.tcl
+nam out.nam
