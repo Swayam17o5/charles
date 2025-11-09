@@ -1,0 +1,79 @@
+nano server.py
+
+import socket
+
+def server_program():
+    host = '0.0.0.0'         # listen on all interfaces
+    port = 5000
+
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    server_socket.bind((host, port))
+    server_socket.listen(1)
+    print(f"Listening on {host}:{port} ...")
+
+    conn, address = server_socket.accept()
+    print("Connection from:", address)
+    try:
+        while True:
+            data = conn.recv(1024)
+            if not data:
+                print("Client disconnected")
+                break
+            msg = data.decode('utf-8', errors='replace')
+            print("From client:", msg)
+            reply = input(" -> ")
+            conn.send(reply.encode('utf-8'))
+            if reply.lower().strip() == 'bye':
+                print("Closing connection")
+                break
+    except KeyboardInterrupt:
+        print("\nServer interrupted")
+    finally:
+        conn.close()
+        server_socket.close()
+
+if __name__ == '__main__':
+    server_program()
+
+nano client.py
+
+import socket
+
+def client_program():
+    server = input("Server IP (default: localhost): ").strip() or 'localhost'
+    port = 5000
+
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client_socket.connect((server, port))
+    print(f"Connected to {server}:{port}")
+
+    try:
+        while True:
+            message = input(" -> ")
+            if not message:
+                continue
+            client_socket.send(message.encode('utf-8'))
+            if message.lower().strip() == 'bye':
+                print("Closing")
+                break
+            data = client_socket.recv(1024)
+            if not data:
+                print("Server closed connection")
+                break
+            print('Received from server:', data.decode('utf-8', errors='replace'))
+    except KeyboardInterrupt:
+        print("\nClient interrupted")
+    finally:
+        client_socket.close()
+
+if __name__ == '__main__':
+    client_program()
+
+terminal 1 : python3 server.py
+
+terminal 2 : python3 client.py
+
+after this in client press enter 
+
+type message in both
