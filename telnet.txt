@@ -22,3 +22,40 @@ sudo systemctl restart openbsd-inetd
 
 
 
+
+
+
+
+Telnet (TELecommunication NETwork) is a network protocol that allows a user to log in and control a remote computer through a command-line interface over a TCP/IP network.
+
+Port Number: 23 (TCP)
+
+Working:
+The Telnet client connects to a Telnet server using port 23.
+After login, a virtual terminal session is created — commands typed on the client are executed on the server.
+
+Uses:
+
+Remote login and administration
+
+Network testing and troubleshooting
+
+Configuring routers and switches
+
+Advantages:
+
+Simple and easy to use
+
+Good for testing network connectivity
+
+Disadvantages:
+
+No encryption (data sent in plain text)
+
+Insecure — replaced by SSH
+
+Difference (Telnet vs SSH):
+Telnet → Unsecure, Port 23
+SSH → Secure, Port 22
+
+
