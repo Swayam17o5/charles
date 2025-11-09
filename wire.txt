@@ -1,0 +1,74 @@
+sudo apt update
+
+sudo apt install wireshark -y
+
+sudo dpkg-reconfigure wireshark-common
+# → Select “Yes” when asked “Should non-superusers be able to capture packets?”
+
+sudo groupadd --force wireshark
+
+sudo usermod -aG wireshark $USER
+
+sudo chgrp wireshark /usr/bin/dumpcap
+
+sudo chmod 750 /usr/bin/dumpcap
+
+sudo setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' /usr/bin/dumpcap
+
+getcap /usr/bin/dumpcap
+(# Expected output: /usr/bin/dumpcap = cap_net_admin,cap_net_raw+eip)
+
+reboot
+
+groups
+
+getcap /usr/bin/dumpcap
+
+dumpcap -D
+
+wireshark
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Theory
+Wireshark is a free, open-source network protocol analyzer used to capture and inspect packets in real time. It helps understand how data travels between devices, analyze protocols (TCP, UDP, ICMP, HTTP, FTP, etc.), and troubleshoot network issues.
+
+It captures packets from a network interface (like enp0s3) and displays details of each layer (Ethernet, IP, TCP/UDP).
+Filters can be used to view only specific traffic, e.g.:
+
+tcp → shows TCP packets
+
+udp → shows UDP packets
+
+icmp → shows ping packets
+
+ip.addr == 192.168.1.5 → traffic for a specific IP
+
+Uses:
+
+Monitor and analyze network traffic
+
+Debug communication errors
+
+Study protocol behavior in NS2 or real networks
