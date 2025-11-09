@@ -1,0 +1,66 @@
+nano server.py
+
+import socket
+
+HOST = socket.gethostbyname(socket.gethostname())
+PORT = 6000
+
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+server_socket.bind((HOST, PORT))
+
+print(f"UDP Server running on {HOST}:{PORT}")
+
+while True:
+    data, addr = server_socket.recvfrom(1024)
+    message = data.decode()
+    print("Client:", message)
+
+    if message.lower() == "exit":
+        print("Client ended chat. Closing.")
+        break
+
+    reply = input("Server: ")
+    server_socket.sendto(reply.encode(), addr)
+
+    if reply.lower() == "exit":
+        print("Server ended chat.")
+        break
+
+server_socket.close()
+
+
+nano client.py
+
+import socket
+
+HOST = socket.gethostbyname(socket.gethostname())
+PORT = 6000
+
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+print("UDP Client started. Type 'exit' to end.")
+
+while True:
+    msg = input("You: ")
+    client_socket.sendto(msg.encode(), (HOST, PORT))
+
+    if msg.lower() == "exit":
+        print("You ended chat.")
+        break
+
+    data, server = client_socket.recvfrom(1024)
+    reply = data.decode()
+    print("Server:", reply)
+
+    if reply.lower() == "exit":
+        print("Server ended chat.")
+        break
+
+client_socket.close()
+
+
+terminal 1 : python3 server.py
+
+terminal 2 : python3 client.py
+
+type message in both
