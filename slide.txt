@@ -59,7 +59,8 @@ sudo apt install tk
 
 
 
-
+ns slide.tcl
+nam out.nam
 
 
 
@@ -139,3 +140,4 @@ TCP Windowing: Because the window_size is set to 4, node1 will send a burst of u
 Short Duration: The FTP application is set to send only 10 packets (num_packets 10). This transfer will happen very quickly (likely in less than a second of simulation time).
 
 Idle Time: After the 10 data packets are successfully sent and acknowledged, the link will go idle. The simulation will continue to run with no activity until it hits the finish command at 10.0 seconds, which leaves the NAM window open for you to inspect.
+
