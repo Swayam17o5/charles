@@ -1,0 +1,59 @@
+1)sudo apt update
+sudo apt install vsftpd
+sudo systemctl start vsftpd
+sudo systemctl enable vsftpd
+
+2)sudo nano /etc/vsftpd.conf
+listen=YES
+anonymous_enable=NO
+local_enable=YES
+write_enable=YES
+chroot_local_user=YES
+allow_writeable_chroot=YES
+
+3)sudo systemctl restart vsftpd
+
+4)sudo ufw allow ftp
+5)sudo useradd -m ftpuser
+sudo passwd ftpuser
+6)sudo -u ftpuser nano /home/ftpuser/office.java
+
+class Office {
+    public static void main(String[] args) {
+        System.out.println("FTP file transfer test!");
+    }
+}
+7)ftp <server_ip>
+hostname -I
+
+8)ftp> binary
+9)ftp> get office.java
+10)ftp> put office.java
+11)ftp> delete office.java
+12)ftp> bye
+
+
+
+
+
+
+
+FTP (File Transfer Protocol) is an application-layer protocol that allows files to be transferred between a client and a server over a TCP/IP network.
+It uses port 21 for control and port 20 for data transfer.
+
+vsftpd (Very Secure FTP Daemon) is a secure and fast FTP server for Linux. It supports both active and passive modes and provides user authentication, file upload/download, and directory isolation (chroot jail).
+
+Key Configuration Parameters
+
+local_enable=YES – allows local users to log in
+
+write_enable=YES – enables upload/delete operations
+
+chroot_local_user=YES – locks user to home directory
+
+allow_writeable_chroot=YES – permits write access inside home
+
+Proper ownership and permissions are essential for file access, set using:
+
+
+
