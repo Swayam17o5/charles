@@ -1,0 +1,24 @@
+1) sudo apt install telnet telnetd -y
+2) sudo ufw status
+3)sudo ufw allow 23/tcp
+sudo ufw reload
+4) sudo apt install openbsd-inetd -y
+5)sudo nano /etc/inetd.conf
+Inside this file, remove the # (uncomment) from the line containing:
+#telnet  stream  tcp  nowait  root  /usr/sbin/tcpd  /usr/sbin/in.telnetd
+
+6)sudo systemctl unmask inetutils-inetd
+sudo systemctl unmask openbsd-inetd
+sudo systemctl unmask inetd
+
+
+7)sudo systemctl enable openbsd-inetd
+sudo systemctl restart openbsd-inetd
+
+8)sudo systemctl status openbsd-inetd
+9)sudo ss -tuln | grep 23
+10)telnet <ip addr>
+   hostname -i
+
+
+
