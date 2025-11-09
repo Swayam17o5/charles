@@ -1,36 +1,31 @@
 1)sudo apt update
-sudo apt install vsftpd
-sudo systemctl start vsftpd
+sudo apt install vsftpd -y
+
+2)sudo systemctl start vsftpd
 sudo systemctl enable vsftpd
 
-2)sudo nano /etc/vsftpd.conf
-listen=YES
+3)sudo nano /etc/vsftpd.conf
+ check if this is present 
 anonymous_enable=NO
 local_enable=YES
 write_enable=YES
 chroot_local_user=YES
 allow_writeable_chroot=YES
 
-3)sudo systemctl restart vsftpd
+4)sudo systemctl restart vsftpd
 
-4)sudo ufw allow ftp
-5)sudo useradd -m ftpuser
-sudo passwd ftpuser
-6)sudo -u ftpuser nano /home/ftpuser/office.java
+5)sudo ufw allow 20/tcp
+sudo ufw allow 21/tcp
+sudo ufw reload
 
-class Office {
-    public static void main(String[] args) {
-        System.out.println("FTP file transfer test!");
-    }
-}
-7)ftp <server_ip>
-hostname -I
+6)sudo ufw status
 
-8)ftp> binary
-9)ftp> get office.java
-10)ftp> put office.java
-11)ftp> delete office.java
-12)ftp> bye
+7)ftp <ip addr>
+8)ftp> ls
+ftp> get hello.txt
+ftp> put hello.txt
+ftp> delete hello.txt
+
 
 
 
