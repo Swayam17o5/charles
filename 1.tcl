@@ -41,5 +41,10 @@ $ns run
 
 
 
+sudo apt update
+sudo apt install ns2 nam
+sudo apt install tcl
+sudo apt install tk
+
 ns 1.tcl
 nam out.nam
