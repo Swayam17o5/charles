@@ -30,6 +30,8 @@ wireshark
 
 
 
+filters 
+eth || ip || icmp || tcp || http
 
 
 
