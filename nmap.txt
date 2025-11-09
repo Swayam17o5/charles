@@ -1,0 +1,113 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Install Nmap
+sudo apt-get install nmap
+
+# Basic Scan Using Domain Name
+nmap www.amazon.com
+
+# Scan Using an IP Address
+nmap 192.168.1.1
+
+# Scan Multiple IP Addresses
+nmap 192.168.1.1 192.168.1.2
+
+# Aggressive Scan on a Subnet
+nmap 192.168.3.*
+
+# Hostname from IP
+sudo nmap -sL 192.168.1.1
+
+# Read IP List from File
+nmap -iL file_name.txt
+
+# Firewall Detection Scan
+sudo nmap -sA 192.168.1.1
+
+# Scan for Open Ports & Services
+nmap -sV 192.168.1.1
+
+# Aggressive Scan with OS & Version Detection
+nmap -A 192.168.1.1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1.
+   sudo apt-get install nmap
+   Installs **Nmap** (network scanner) on your system.
+
+2  nmap www.amazon.com
+   Scans the domain `www.amazon.com` for open ports and services.
+
+3  nmap 192.168.1.1
+   Scans the IP address `192.168.1.1` for open ports and services.
+
+4. nmap 192.168.1.1 192.168.1.2
+   Scans multiple IP addresses (e.g., `192.168.1.1` and `192.168.1.2`) for open ports and services.
+
+5. nmap 192.168.3.*
+   Scans all IP addresses in the `192.168.3.*` subnet for open ports and services.
+
+6. sudo nmap -sL 192.168.1.1
+   Resolves and displays the hostname associated with the IP address `192.168.1.1`.
+
+7. nmap -iL file_name.txt
+   Reads a list of IP addresses from a file (`file_name.txt`) and scans them for open ports.
+
+8. sudo nmap -sA 192.168.1.1
+   Performs an ACK scan to detect firewall rules or packet filtering on the host `192.168.1.1`.
+
+9. nmap -sV 192.168.1.1
+   Scans the IP `192.168.1.1` for open ports and detects the versions of services running on those ports.
+10.
+nmap -A 192.168.1.1
+Performs an aggressive scan that includes OS detection, service version detection, and traceroute.
+
+
